@@ -99,8 +99,9 @@ main{
 
 section{
     background: var(--warnabackground);
-    margin: 2rem;
+    margin: 0rem 2rem ;
     width: 100%;    
+    padding: 2rem;
 }
 
 section input{
@@ -117,7 +118,7 @@ section input{
     align-items: center;
 }
 
-.container-form input, .container-cari-buku input {
+.container-form input{
     display: flex;
     border: none;
     border-bottom: 1px solid black;
@@ -147,7 +148,13 @@ button:hover{
     background-color: red;
 }
 
-.container-cari-buku{
-    display: inline-block;
-    
+.container-cari-buku input{
+    display: inline-flex;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 0.5rem;
+    width: 15em;
+    border-radius: 2rem 2rem ;
+    margin: 0 1rem;
+    font-size: var(--Font_B_Aja);
 }
