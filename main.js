@@ -34,24 +34,64 @@ function tambahBuku(){
 }
 
 
-function createElementBook(){
-    const parent = document.querySelector('#completeBookList'); 
-    const children = parent.children
+function createElementBook(bookid){
+
+    const containerListBook = document.createElement('div');
+    containerListBook.setAttribute('data-bookid',bookid.id);
+    containerListBook.setAttribute('data-testid',bookid.progres);
+    
+    const createsubheading = document.createElement('h3');
+    createsubheading.setAttribute('data-testid', 'bookItemTitle');
+    createsubheading.innerHTML = bookid.judulBuku
+
+    const createElementPenulis = document.createElement('p');
+    createElementPenulis.setAttribute('data-testid', 'bookItemAuthor');
+    createElementPenulis.innerHTML = bookid.PenulisBuku
+
+    const createElementTahun = document.createElement('p');
+    createElementTahun.setAttribute('data-testid', 'bookItemYear');
+    createElementTahun.innerHTML = bookid.tahunBuku
+    
+    
+        // for (let index of getchil){
+        //     const chillFromParent = index.children;
+
+        //     const id =   
+        //     console.log(chillFromParent)
+        //     console.log(chillFromParent[0])
+        // };
     
 
+    
+};
 
-    for (let index of children){
-        const chillFromParent = index.children
-        
-        const selectParentList = document.querySelector('[data-bookid= ""]')
-        console.log(selectParentList)
-        
-        console.log(chillFromParent)
-        // console.log(chillFromParent[0])
+// console.log(getchil)
+
+//     for (let index of getchil){
+//         const chillFromParent = index.children;
+
+//         const id =   
+//         console.log(chillFromParent)
+//         console.log(chillFromParent[0])
+//     };
+
+document.dispatchEvent(,function(ev){
+    console.log(ev.type)
+    const parentElementComplete = document.getElementById('incompleteBookList');
+    const parentElementNoComplete = document.getElementById('completeBookList');
+    
+    for (let itemBook of dataBuku){
+        const outputCreateElement = createElementBook(itemBook)
+
+        if(!itemBook.progres){
+            console.log('progers False benar ')
+            parentElementNoComplete.append(outputCreateElement)
+        }else{
+            console.log('progress is selesai')
+            parentElementComplete.append(outputCreateElement)
+        }
     }
-
-}
-
+})
 
 
 document.addEventListener('DOMContentLoaded', function(){
