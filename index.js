@@ -174,7 +174,7 @@ document.addEventListener(EVENT_CUSTOM, function() {
 
 
 document.addEventListener('DOMContentLoaded', function (){
-  
+
   const selectForm = document.getElementById('form');
     
   selectForm.addEventListener('submit', function(event){

@@ -158,3 +158,24 @@ button:hover{
     margin: 0 1rem;
     font-size: var(--Font_B_Aja);
 }
+
+
+.container-buku-belum{
+    border: 1px solid black;
+    /* background-color: red; */
+}
+
+.container-buku-selesai{
+    border: 1px solid black;
+    /* background-color: red; */
+}
+
+.listbook{
+
+    border: 1px solid red;
+}
+.container-buku-belum .listbook > div{
+    display: flex;
+    /* border: 1px solid red; */
+    justify-content: space-around;
+}
