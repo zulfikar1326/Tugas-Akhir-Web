@@ -105,7 +105,6 @@ section{
 }
 
 section input{
-    /* background-color: red; */
     text-align: center;
 }
 
@@ -162,21 +161,14 @@ button:hover{
 
 .container-buku-belum{
     border: 1px solid black;
-    /* background-color: red; */
 }
 
 .container-buku-selesai{
     border: 1px solid black;
-    /* background-color: red; */
 }
 
-.listbook{
-
-    border: 1px solid red;
-}
 .container-buku-belum .listbook > div{
     display: flex;
-    /* border: 1px solid red; */
     justify-content: space-around;
 }
 
@@ -186,7 +178,6 @@ button:hover{
     position: fixed;
     color: black;
     width: 45vw;
-    /* height: 30%; */
     background-color: rgba(255,255,255,1);
 }
 
@@ -221,15 +212,4 @@ button:hover{
     -moz-border-radius: 1rem;
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
-}
-
-.container-informasi-Buku-yang-dicari{
-    visibility: hidden;
-}
-.container-informasi-Buku-yang-dicari > div{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5rem;
-
 }

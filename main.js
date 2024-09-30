@@ -5,11 +5,11 @@ const newevent = 'NEWEVENT';
 const eventedit = "EventEdit";
 
 
-const SAVE_EVENT = 'save_event' //tracking debugging
-const storageKey = 'WEB_LOCAL_BOOK' //KEY STORAGE WEB 
+const SAVE_EVENT = 'save_event' 
+const storageKey = 'WEB_LOCAL_BOOK' 
 
 
-// MENDETEKSI BROSER SUPPORT STORAGE LOCAL ATAU TIDAK 
+
 function storageBrowserSupport(){
     if (typeof (Storage) === undefined){
         console.log('Browser Tidak Support!!')
@@ -18,44 +18,6 @@ function storageBrowserSupport(){
     console.log('Support Sedang Dikerjakan')
     return true;
 }
-
-
-
-
-// function fungsijikaBukuada(bookJudul,idbook){
-//     const container_hasil_pencarian = document.querySelector('.container-informasi-Buku-yang-dicari');
-//     const displayJudul = document.getElementById('judulBookCari');
-//     const arahkanBuku = document.getElementById('arahkaBuku');
-//     arahkanBuku.removeAttribute('href');
-
-//     container_hasil_pencarian.style.visibility = 'visible';
-//     displayJudul.innerText = bookJudul
-
-//     arahkanBuku.setAttribute('href', "#"+idbook)
-// }
-
-
-// function fungsicariIndex(){
-//     for (let index in bookid){
-//         if (bookid[index].judulBuku  === juduldicari){
-//             // fungsijikaBukuada(juduldicari,bookid[index].id)
-//             return index;
-//         }else{
-//             alert('Buku Yang anda Cari Tidak ada')
-//         }
-//     }
-
-//     return null
-
-// } 
-
-// function cariBuku(bookid){
-//     const formCariBuku = document.getElementById('searchBook');
-//     formCariBuku.addEventListener('submit', function(){
-//         const juduldicari = document.getElementById('searchBookTitle').value;
-
-//     })
-// }
 
 function fungsibuttonedit(bookid){
     const Judul = prompt("Masukkan Judul Buku Terbaru\t: ")
@@ -135,7 +97,6 @@ function createObjek(id,judulBuku,PenulisBuku,tahunBuku,progres){
 
 
 function tambahBuku(){
-    console.log('menambahkan Buku ke Dalam Array')
     const inputJudulBuku = document.getElementById('bookFormTitle').value;
     const inputPenulisBuku = document.getElementById('bookFormAuthor').value;
     const inputTahunBuku = document.getElementById('bookFormYear').value;
@@ -152,11 +113,9 @@ function tambahBuku(){
 
 function createElementBook(bookid){
     
-    console.log('Membuat element Html')
-
     const containerListBook = document.createElement('div');
     containerListBook.setAttribute('data-bookid',bookid.id);
-    containerListBook.setAttribute('data-testid',bookid.progres);
+    containerListBook.setAttribute('data-testid','bookItem');
     containerListBook.setAttribute('class','listbook')
     
     const createsubheading = document.createElement('h3');
@@ -193,7 +152,6 @@ function createElementBook(bookid){
     buttonisprogres.innerText = 'Sudah Baca';
 
     if (bookid.progres){
-        console.log('Buku Selesai Dibaca');
         containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
 
         buttonisprogres.innerText = 'Belum Dibaca'
@@ -215,7 +173,6 @@ function createElementBook(bookid){
         
         
     }else{
-        console.log('Buku Belum Selesai Dibaca')
         containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
         
         buttonisprogres.innerText = 'Sudah Dibaca'
@@ -241,7 +198,6 @@ function createElementBook(bookid){
 
 
 document.addEventListener(newevent,function(){
-    console.log('Memicu Event Custom')
     const parentElementComplete = document.getElementById('incompleteBookList');
     parentElementComplete.innerHTML = '';
 
@@ -253,10 +209,8 @@ document.addEventListener(newevent,function(){
         const outputCreateElement = createElementBook(itemBook)
 
         if(!itemBook.progres){
-            // Jika Selesai 
             parentElementComplete.append(outputCreateElement)
         }else{
-            //Jika belum Selsai
             parentElementNoComplete.append(outputCreateElement)
         }
     };
@@ -279,10 +233,8 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 
     const elementForm = document.getElementById('bookForm'); 
-    // createElementBook()
     console.log(dataBuku)
     elementForm.addEventListener('submit', function(ev){
-        console.log('Submit Form....')
         tambahBuku()
         ev.preventDefault();
     })
