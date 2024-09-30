@@ -23,37 +23,29 @@
       <h1>Bookshelf App</h1>
     </header>
 
-
-
     <main>  
 
       <section class="container-form">
         
-        <!-- HEADING FORM  -->
         <h2>Tambah Buku Baru</h2>
 
-        <!-- FORM INPUT BUKU -->
         <form id="bookForm" data-testid="bookForm">
 
-          <!-- INPUT JUDUL BUKU  -->
           <div>
             <label for="bookFormTitle">Judul</label>
             <input id="bookFormTitle" type="text" required data-testid="bookFormTitleInput" />
           </div>
 
-          <!-- INPUT PENULIS BUKU  -->
           <div>
             <label for="bookFormAuthor">Penulis</label>
             <input id="bookFormAuthor" type="text" required data-testid="bookFormAuthorInput" />
           </div>
 
-          <!-- INPUT TAHUN BUKU  -->
           <div>
             <label for="bookFormYear">Tahun</label>
             <input id="bookFormYear" type="number" required data-testid="bookFormYearInput" />
           </div>
 
-          <!-- INPUT KONDISI BUKU  -->
           <div>
             <label for="bookFormIsComplete">Selesai dibaca</label>
             <input
@@ -63,7 +55,6 @@
             />
           </div>
 
-          <!-- SUBMIT FORM  -->
           <button id="bookFormSubmit" type="submit" data-testid="bookFormSubmitButton">
             Masukkan Buku ke rak <span>Belum selesai dibaca</span>
           </button>
@@ -74,15 +65,13 @@
 
 
       <section class="container-cari-buku">
-      
         <h2>Cari Buku</h2>
-      
 
         <form id="searchBook" data-testid="searchBookForm">
           <label for="searchBookTitle">Judul</label>
           <input id="searchBookTitle" type="text" data-testid="searchBookFormTitleInput" />
           <button id="searchSubmit" type="submit" data-testid="searchBookFormSubmitButton">
-            Cari
+            Caril
           </button>
         </form>
       </section>
