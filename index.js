@@ -72,7 +72,7 @@ function findTodoIndex(objek){
 // FUNGSI HAPUS TUGAS 
 function removetaskfromcomplete(objek){
   const todoTarget = findTodoIndex(objek)
-
+  console.log(todoTarget)
   if (todoTarget === -1) return;
   
   TodoData.splice(todoTarget,1)

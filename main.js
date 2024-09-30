@@ -1,8 +1,68 @@
 const dataBuku = [];
 
 
-const newevent = 'NEWEVENT'
-const eventcheckbox = "Custom_Event_For_Chekbox"
+const newevent = 'NEWEVENT';
+const eventedit = "EventEdit";
+
+
+
+function fungsibuttonedit(bookid){
+    const Judul = prompt("Masukkan Judul Buku Terbaru\t: ")
+    const Penulis = prompt("Masukkan Penulis Buku\t\t: ")
+    const Tahun = prompt("Masukkan Tahun BUku\t\t\t: ")
+    const Progres = prompt("Masukkan Progres Buku\t\t: ")
+
+    for (let data in dataBuku){
+        if (dataBuku[data].id === bookid.id){
+            console.log('Id sama')
+            dataBuku[data].judulBuku = Judul
+            dataBuku[data].PenulisBuku = Penulis 
+            dataBuku[data].tahunBuku = Tahun
+            dataBuku[data].progres = Progres
+        }
+    }
+    
+    document.dispatchEvent(new Event(newevent))
+    
+    console.log(bookid)
+}
+
+
+function findBookItem(book){
+    for (const item of dataBuku){
+        if (item.id === book){
+            return item;
+        }
+    }
+    
+    return null;
+}
+
+
+function fungsiButtonHapus(){
+    dataBuku.splice(-1, 1)
+    document.dispatchEvent(new Event(newevent))
+};
+
+
+function fungsiButtonprogresTrue(book){
+    const bookTarget = findBookItem(book)
+
+    if (bookTarget == null){
+        book.progres = false;
+        document.dispatchEvent(new Event(newevent))
+    };
+}
+
+function fungsiButtonprogresFalse(book){
+    const bookTarget = findBookItem(book)
+
+    if (bookTarget == null){
+        book.progres = true;
+        document.dispatchEvent(new Event(newevent))
+    };
+}
+
 
 function createIdRandom(){
     return +new Date()
@@ -28,12 +88,11 @@ function tambahBuku(){
 
     const randomid = createIdRandom()
     const convertToObjk = createObjek(randomid,inputJudulBuku,inputPenulisBuku,inputTahunBuku,isbaca)  
-    dataBuku.unshift(convertToObjk)
+    dataBuku.push(convertToObjk)
 
     document.dispatchEvent(new Event(newevent))
 
 }
-
 
 function createElementBook(bookid){
     
@@ -61,43 +120,65 @@ function createElementBook(bookid){
 
     const createcontainerButton = document.createElement('div')
     containerListBook.append(createcontainerButton)
-
-    const buttonDone = document.createElement('button');
-    buttonDone.setAttribute('data-testid','bookItemIsCompleteButton');
-    buttonDone.innerText = "Selesai dibaca";
-    createcontainerButton.append(buttonDone)
-
+    
     const buttonHapus = document.createElement('button');
     buttonHapus.setAttribute('data-testid', "bookItemDeleteButton");
+    buttonHapus.setAttribute('id','buttonHapus');
     buttonHapus.innerText = "Hapus Buku";
-    createcontainerButton.append(buttonHapus)
+
 
     const buttonEdit = document.createElement('button');
-    buttonEdit.setAttribute('data-testid','bookItemEditButton')
+    buttonEdit.setAttribute('data-testid','bookItemEditButton');
     buttonEdit.innerText = "Edit Buku";
-    createcontainerButton.append(buttonEdit)
 
-        // for (let index of getchil){
-        //     const chillFromParent = index.children;
+    const buttonisprogres = document.createElement('button');
+    buttonHapus.setAttribute('data-testid', "bookItemEditButton");
+    buttonisprogres.setAttribute('id','isprogres')
+    buttonisprogres.innerText = 'Sudah Baca';
 
-        //     const id =   
-        //     console.log(chillFromParent)
-        //     console.log(chillFromParent[0])
-        // };
-    
+    if (bookid.progres){
+        console.log('Buku Selesai Dibaca');
+        containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
 
-    return containerListBook
+        buttonisprogres.addEventListener('click', function(){
+            console.log('Button Is progres diclik')
+            fungsiButtonprogresTrue(bookid);
+        });
+
+        buttonEdit.addEventListener('click', function(){
+            console.log('Button Is Edit On')
+            fungsibuttonedit(bookid);
+        });
+
+        buttonHapus.addEventListener('click', function(){
+            console.log('Button Hapus Diclik')
+            fungsiButtonHapus(bookid)
+        })
+        
+        
+    }else{
+        console.log('Buku Belum Selesai Dibaca')
+        containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
+        
+        buttonisprogres.addEventListener('click', function(){
+            console.log('Button Is progres diclik')
+            fungsiButtonprogresFalse(bookid);
+
+        });
+
+        buttonEdit.addEventListener('click', function(){
+            console.log('Button Is Edit On')
+            fungsibuttonedit(bookid);
+        });
+
+        buttonHapus.addEventListener('click', function(){
+            console.log('Button Hapus Diclik')
+            fungsiButtonHapus(bookid)
+        })
+    }
+    return containerListBook;
 };
 
-// console.log(getchil)
-
-//     for (let index of getchil){
-//         const chillFromParent = index.children;
-
-//         const id =   
-//         console.log(chillFromParent)
-//         console.log(chillFromParent[0])
-//     };
 
 document.addEventListener(newevent,function(){
     console.log('Memicu Event Custom')
@@ -118,25 +199,28 @@ document.addEventListener(newevent,function(){
             //Jika belum Selsai
             parentElementNoComplete.append(outputCreateElement)
         }
-    }
+    };
+
+});
+
+
+document.addEventListener(eventedit, function(event){
+    console.log(event.type)
 })
 
 
-
-
-document.addEventListener('DOMContentLoaded', function(event){
+document.addEventListener('DOMContentLoaded', function(){
     console.log('event Berhashil diload')
 
-    const elementForm= document.getElementById('bookForm'); 
+    const elementForm = document.getElementById('bookForm'); 
     // createElementBook()
-    
+    console.log(dataBuku)
     elementForm.addEventListener('submit', function(ev){
         console.log('Submit Form....')
         tambahBuku()
         ev.preventDefault();
     })
-    
-    
-})
 
 
+
+});

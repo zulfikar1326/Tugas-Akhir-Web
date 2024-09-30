@@ -179,3 +179,46 @@ button:hover{
     /* border: 1px solid red; */
     justify-content: space-around;
 }
+
+
+#containerRename{
+    visibility: hidden;
+    position: fixed;
+    color: black;
+    width: 45vw;
+    /* height: 30%; */
+    background-color: rgba(255,255,255,1);
+}
+
+
+#containerRename div > input{
+    border: none;
+    background-color: rgba(128, 128, 128,0.3);
+    border-bottom: 1px solid black;
+    display: flex;
+    margin: auto;
+}
+
+#containerRename form > div{
+    padding: 0.5rem;
+} 
+
+#buttonExit:hover, #buttonsubmit:hover {
+    background-color:  red;
+    color:  #fff;
+}
+
+.manipulasiButton{
+    display: flex;
+    justify-content: center;
+}
+.manipulasiButton #buttonExit, .manipulasiButton #buttonsubmit{
+    font-size: 1rem;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    -webkit-border-radius: 1rem;
+    -moz-border-radius: 1rem;
+    -ms-border-radius: 1rem;
+    -o-border-radius: 1rem;
+}
