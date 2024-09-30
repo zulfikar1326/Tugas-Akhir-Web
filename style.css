@@ -222,3 +222,14 @@ button:hover{
     -ms-border-radius: 1rem;
     -o-border-radius: 1rem;
 }
+
+.container-informasi-Buku-yang-dicari{
+    visibility: hidden;
+}
+.container-informasi-Buku-yang-dicari > div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+
+}

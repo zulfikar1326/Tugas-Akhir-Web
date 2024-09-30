@@ -5,6 +5,57 @@ const newevent = 'NEWEVENT';
 const eventedit = "EventEdit";
 
 
+const SAVE_EVENT = 'save_event' //tracking debugging
+const storageKey = 'WEB_LOCAL_BOOK' //KEY STORAGE WEB 
+
+
+// MENDETEKSI BROSER SUPPORT STORAGE LOCAL ATAU TIDAK 
+function storageBrowserSupport(){
+    if (typeof (Storage) === undefined){
+        console.log('Browser Tidak Support!!')
+        return false;
+    }
+    console.log('Support Sedang Dikerjakan')
+    return true;
+}
+
+
+
+
+// function fungsijikaBukuada(bookJudul,idbook){
+//     const container_hasil_pencarian = document.querySelector('.container-informasi-Buku-yang-dicari');
+//     const displayJudul = document.getElementById('judulBookCari');
+//     const arahkanBuku = document.getElementById('arahkaBuku');
+//     arahkanBuku.removeAttribute('href');
+
+//     container_hasil_pencarian.style.visibility = 'visible';
+//     displayJudul.innerText = bookJudul
+
+//     arahkanBuku.setAttribute('href', "#"+idbook)
+// }
+
+
+// function fungsicariIndex(){
+//     for (let index in bookid){
+//         if (bookid[index].judulBuku  === juduldicari){
+//             // fungsijikaBukuada(juduldicari,bookid[index].id)
+//             return index;
+//         }else{
+//             alert('Buku Yang anda Cari Tidak ada')
+//         }
+//     }
+
+//     return null
+
+// } 
+
+// function cariBuku(bookid){
+//     const formCariBuku = document.getElementById('searchBook');
+//     formCariBuku.addEventListener('submit', function(){
+//         const juduldicari = document.getElementById('searchBookTitle').value;
+
+//     })
+// }
 
 function fungsibuttonedit(bookid){
     const Judul = prompt("Masukkan Judul Buku Terbaru\t: ")
@@ -23,6 +74,7 @@ function fungsibuttonedit(bookid){
     }
     
     document.dispatchEvent(new Event(newevent))
+    saveData();
     
     console.log(bookid)
 }
@@ -42,6 +94,7 @@ function findBookItem(book){
 function fungsiButtonHapus(){
     dataBuku.splice(-1, 1)
     document.dispatchEvent(new Event(newevent))
+    saveData();
 };
 
 
@@ -51,6 +104,7 @@ function fungsiButtonprogresTrue(book){
     if (bookTarget == null){
         book.progres = false;
         document.dispatchEvent(new Event(newevent))
+        saveData();
     };
 }
 
@@ -60,6 +114,7 @@ function fungsiButtonprogresFalse(book){
     if (bookTarget == null){
         book.progres = true;
         document.dispatchEvent(new Event(newevent))
+        saveData();
     };
 }
 
@@ -90,7 +145,8 @@ function tambahBuku(){
     const convertToObjk = createObjek(randomid,inputJudulBuku,inputPenulisBuku,inputTahunBuku,isbaca)  
     dataBuku.push(convertToObjk)
 
-    document.dispatchEvent(new Event(newevent))
+    document.dispatchEvent(new Event(newevent));
+    saveData();
 
 }
 
@@ -140,6 +196,8 @@ function createElementBook(bookid){
         console.log('Buku Selesai Dibaca');
         containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
 
+        buttonisprogres.innerText = 'Belum Dibaca'
+
         buttonisprogres.addEventListener('click', function(){
             console.log('Button Is progres diclik')
             fungsiButtonprogresTrue(bookid);
@@ -160,6 +218,8 @@ function createElementBook(bookid){
         console.log('Buku Belum Selesai Dibaca')
         containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
         
+        buttonisprogres.innerText = 'Sudah Dibaca'
+
         buttonisprogres.addEventListener('click', function(){
             console.log('Button Is progres diclik')
             fungsiButtonprogresFalse(bookid);
@@ -204,13 +264,19 @@ document.addEventListener(newevent,function(){
 });
 
 
-document.addEventListener(eventedit, function(event){
-    console.log(event.type)
-})
-
-
 document.addEventListener('DOMContentLoaded', function(){
-    console.log('event Berhashil diload')
+    const formCariBook = document.getElementById('searchBook');
+
+    if (storageBrowserSupport()) {
+        loadDataFromStorage();
+    }
+
+
+    formCariBook.addEventListener('submit', function(ev){
+        cariBuku(dataBuku);
+        ev.preventDefault();
+
+    })
 
     const elementForm = document.getElementById('bookForm'); 
     // createElementBook()
@@ -220,7 +286,35 @@ document.addEventListener('DOMContentLoaded', function(){
         tambahBuku()
         ev.preventDefault();
     })
-
-
-
 });
+
+
+function saveData() {
+    if (storageBrowserSupport()) {
+        const data = JSON.stringify(dataBuku);
+        localStorage.setItem(storageKey, data);
+        
+        document.dispatchEvent(new Event(SAVE_EVENT));
+    }
+}
+
+document.addEventListener(SAVE_EVENT, function (ev) {
+    console.log(localStorage.getItem(storageKey));
+    console.log(ev.type)
+});
+
+function loadDataFromStorage() {
+    const serializedData = localStorage.getItem(storageKey);
+    let data = JSON.parse(serializedData);
+    console.log(data)
+
+    if (data !== null) {
+        for (const index of data) {
+            dataBuku.push(index);
+
+            console.log(index)
+        }
+    }
+
+    document.dispatchEvent(new Event(newevent));
+}
