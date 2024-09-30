@@ -152,7 +152,7 @@ function createElementBook(bookid){
     buttonisprogres.innerText = 'Sudah Baca';
 
     if (bookid.progres){
-        containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
+        createcontainerButton.append(buttonEdit,buttonHapus,buttonisprogres);
 
         buttonisprogres.innerText = 'Belum Dibaca'
 
@@ -173,7 +173,7 @@ function createElementBook(bookid){
         
         
     }else{
-        containerListBook.append(buttonEdit,buttonHapus,buttonisprogres);
+        createcontainerButton.append(buttonEdit,buttonHapus,buttonisprogres);
         
         buttonisprogres.innerText = 'Sudah Dibaca'
 
@@ -219,7 +219,6 @@ document.addEventListener(newevent,function(){
 
 
 document.addEventListener('DOMContentLoaded', function(){
-    const formCariBook = document.getElementById('searchBook');
 
     if (storageBrowserSupport()) {
         loadDataFromStorage();
