@@ -231,7 +231,7 @@ function saveData() {
     }
 }
 
-document.addEventListener(SAVE_EVENT, function (ev) {
+document.addEventListener(SAVE_EVENT, function () {
     const getItem = localStorage.getItem(storageKey)
 });
 
