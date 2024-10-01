@@ -210,18 +210,9 @@ document.addEventListener(newevent,function(){
 
 
 document.addEventListener('DOMContentLoaded', function(){
-    const formCariBook = document.getElementById('searchBook');
-
     if (storageBrowserSupport()) {
         loadDataFromStorage();
     }
-
-
-    formCariBook.addEventListener('submit', function(ev){
-        cariBuku(dataBuku);
-        ev.preventDefault();
-
-    })
 
     const elementForm = document.getElementById('bookForm'); 
     elementForm.addEventListener('submit', function(ev){
